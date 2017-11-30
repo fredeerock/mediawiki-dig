@@ -1,4 +1,7 @@
-Run with: `docker-compose up -d`
+Grab the docker-compose file with:
+`curl -sSL https://raw.githubusercontent.com/fredeerock/mediawiki-dig/master/docker-compose.yml > docker-compose.yml`
+
+Then run with: `docker-compose up -d`
 
 ---
 
@@ -6,11 +9,13 @@ If you change your environmental variables and want them to be reflected in the 
 
 1. `docker-compose stop mediawiki mariadb && docker-compose rm mediawiki mariadb && docker system prune`
 
+3. Then...
+
     - If your volumes are mounted you can just delete the **mariadb_data** and **mediawiki_data** folders.
 
     - If your volumes are **NOT** mounted you would use `docker volume prune` to wipe to the unused volumes.
 
-2. Then you would just re-run with: `docker-compose up -d`.
+2. Finally, just re-run with: `docker-compose up -d`.
 
 --- 
 

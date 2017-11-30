@@ -1,4 +1,4 @@
-Grab the docker-compose file with:
+Grab the docker-compose file with:  
 `curl -sSL https://raw.githubusercontent.com/fredeerock/mediawiki-dig/master/docker-compose.yml > docker-compose.yml`
 
 Then run with: `docker-compose up -d`

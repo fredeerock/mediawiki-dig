@@ -8,7 +8,7 @@ services:
       - MARIADB_USER=bn_mediawiki
       - MARIADB_DATABASE=bitnami_mediawiki
     volumes:
-      - './mariadb_data:/bitnami'
+      - './data/mariadb:/bitnami'
   mediawiki:
     image: 'bitnami/mediawiki:latest'
     labels:
@@ -24,7 +24,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - './mediawiki_data:/bitnami'
+      - './data/mediawiki:/bitnami'
     depends_on:
       - mariadb
 

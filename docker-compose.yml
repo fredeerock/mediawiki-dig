@@ -1,28 +1,38 @@
-version: '2'
+version: '3.2'
 services:
   mariadb:
     image: 'bitnami/mariadb:latest'
-    env_file: './vars.env'
     environment:
       # - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_mediawiki
       - MARIADB_DATABASE=bitnami_mediawiki
+      - MARIADB_ROOT_PASSWORD=your_mariadb_root_password
+      - MARIADB_PASSWORD=your_database_password
     volumes:
       - './data/mariadb:/bitnami'
+    networks:
+      - frontend
   mediawiki:
     image: 'bitnami/mediawiki:latest'
-    labels:
-      kompose.service.type: nodeport
-    env_file: './vars.env'
     environment:
       # - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
       - MEDIAWIKI_DATABASE_USER=bn_mediawiki
       - MEDIAWIKI_DATABASE_NAME=bitnami_mediawiki
-    ports:
-      - '80:80'
-      - '443:443'
+      - MEDIAWIKI_WIKI_NAME=Bitnami MediaWiki
+      - MEDIAWIKI_USERNAME=user
+      - MEDIAWIKI_PASSWORD=bitnami1
+      - MEDIAWIKI_EMAIL=user@example.com
+      - MEDIAWIKI_DATABASE_PASSWORD=your_database_password
+      - SMTP_HOST=ssl://smtp.gmail.com
+      - SMTP_HOST_ID=mydomain.com
+      - SMTP_PORT=465
+      - SMTP_USER=your_email@gmail.com
+      - SMTP_PASSWORD=your_password
+    # ports: #comment this section out when using with nginx-docker-proxy
+      # - '80:80'
+      # - '443:443'
     volumes:
       - './data/mediawiki:/bitnami'
     depends_on:
@@ -34,4 +44,3 @@ services:
 #     driver: local
 #   mediawiki_data:
 #     driver: local
-

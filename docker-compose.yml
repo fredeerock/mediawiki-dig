@@ -9,9 +9,7 @@ services:
       - MARIADB_ROOT_PASSWORD=your_mariadb_root_password
       - MARIADB_PASSWORD=your_database_password
     volumes:
-      - './data/mariadb:/bitnami'
-    networks:
-      - frontend
+      - './data/mariadb_data:/bitnami'
   mediawiki:
     image: 'bitnami/mediawiki:latest'
     environment:
@@ -31,10 +29,10 @@ services:
       - SMTP_USER=your_email@gmail.com
       - SMTP_PASSWORD=your_password
     # ports: #comment this section out when using with nginx-docker-proxy
-      # - '80:80'
-      # - '443:443'
+    #   - '80:80'
+    #   - '443:443'
     volumes:
-      - './data/mediawiki:/bitnami'
+      - './data/mediawiki_data:/bitnami'
     depends_on:
       - mariadb
 
